@@ -1,5 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  experimental: {
+    appDir: true, // Ensure Next.js uses the App Router
+  },
   images: {
     domains: [
       "user-images.githubusercontent.com",
@@ -10,4 +13,4 @@ const nextConfig = {
   },
 };
 
-module.exports = nextConfig;
+export default nextConfig;
