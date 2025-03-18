@@ -8,9 +8,6 @@ const nextConfig = {
       "miro.medium.com",
     ],
   },
-  experimental: {
-    serverActions: true, // If needed, otherwise remove
-  },
 };
 
 module.exports = nextConfig;
