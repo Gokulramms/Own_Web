@@ -49,7 +49,7 @@ openGraph: {
     siteName: "Gokulramm S Portfolio",
     images: [
       {
-        url: "https://user-images.githubusercontent.com/84178696/228620835-e3cc5c9b-72fc-4f54-a628-407ef7b650f5.png",
+        url: "https://imgur.com/a/e9ShgTf",
         width: 1200,
         height: 630,
         alt: "Gokulramm S — Software Engineer",
