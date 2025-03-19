@@ -21,7 +21,7 @@ const Footer = () => {
           <Link
             href="https://www.linkedin.com/in/gokulramm-s-984a69257?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
             target="_blank"
-            aria-label="Victor's GitHub Profile"
+            aria-label="Gokulramm's LinkedIn Profile"
           >
             <span className="underline underline-offset-2 hover:no-underline">
               <AnimatedBody text={"SGR"} className={"m-0 p-0"} />

@@ -23,7 +23,8 @@ const Hero = () => {
           <Link
             href="https://github.com/Gokulramms"
             target="_blank"
-            aria-label="View GitHub Profile"
+            aria-label="Gokulramm's github Profile"
+
           >
             <motion.p
               className="text-[16px] font-bold text-[#e4ded7] md:text-[16px]"

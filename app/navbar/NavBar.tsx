@@ -1,67 +1,50 @@
 "use client";
+import React from "react";
 import Link from "next/link";
-import { faFilePdf } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useEffect, useState } from "react";
+
+const sections = ["home", "work", "about", "contact"];
 
 const NavBar = () => {
-  const handleScroll = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
-    // first prevent the default behavior
-    e.preventDefault();
-    // get the href and remove everything before the hash (#)
-    const href = e.currentTarget.href;
-    const targetId = href.replace(/.*\#/, "");
-    // get the element by id and use scrollIntoView
-    const elem = document.getElementById(targetId);
-    elem?.scrollIntoView({
-      behavior: "smooth",
+  const [activeSection, setActiveSection] = useState<string>("home");
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visibleSection = entries.find((entry) => entry.isIntersecting);
+        if (visibleSection) {
+          setActiveSection(visibleSection.target.id);
+        }
+      },
+      { threshold: 0.6 }
+    );
+
+    sections.forEach((id) => {
+      const section = document.getElementById(id);
+      if (section) observer.observe(section);
     });
+
+    return () => observer.disconnect();
+  }, []);
+
+  const handleScroll = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>, id: string) => {
+    e.preventDefault();
+    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
   };
 
   return (
-    <nav className="fixed bottom-10 left-0 right-0 z-50 my-0  mx-auto  flex w-[306px] items-center justify-center gap-1 rounded-lg bg-[#07070a]/90 px-1 py-1 text-[#e4ded7] backdrop-blur-md sm:w-[383.3px] md:p-2 lg:w-[391.3px]">
-
-      <Link
-        href="#home"
-        data-blobity-magnetic="false"
-        onClick={handleScroll}
-        aria-label="Scroll to Home Section"
-      >
-        <h4 className="rounded py-2 px-2 sm:px-4 text-[12px] sm:text-[14px] md:py-1 md:px-4">
-          Home
-        </h4>
-      </Link>
-      <Link
-        href="#work"
-        data-blobity-magnetic="false"
-        onClick={handleScroll}
-        aria-label="Scroll to Work Section"
-      >
-        <h4 className="rounded py-2 px-2 sm:px-4 text-[12px] sm:text-[14px] md:py-1 md:px-4">
-          Work
-        </h4>
-      </Link>
-
-      <Link
-        href="#about"
-        data-blobity-magnetic="false"
-        onClick={handleScroll}
-        aria-label="Scroll to About Section"
-      >
-        <h4 className="rounded py-2 px-2 sm:px-4 text-[12px] sm:text-[14px] md:py-1 md:px-4">
-          About
-        </h4>
-      </Link>
-
-      <Link
-        href="#contact"
-        data-blobity-magnetic="false"
-        onClick={handleScroll}
-        aria-label="Scroll to Contact Section"
-      >
-        <h4 className="rounded py-2 px-2 sm:px-4 text-[12px] sm:text-[14px] md:py-1 md:px-4">
-          Contact
-        </h4>
-      </Link>
+    <nav className="fixed bottom-10 left-0 right-0 z-50 mx-auto flex w-[330px] items-center justify-center gap-2 rounded-lg bg-[#07070a]/90 px-2 py-2 text-[#e4ded7] backdrop-blur-md sm:w-[400px] md:p-2 lg:w-[420px]">
+      {sections.map((id) => (
+        <Link key={id} href={`#${id}`} onClick={(e) => handleScroll(e, id)} aria-label={`Scroll to ${id} Section`}>
+          <h4
+            className={`rounded py-2 px-2 sm:px-4 text-[12px] sm:text-[14px] md:py-1 md:px-4 transition-all duration-300 ${
+              activeSection === id ? "text-red-400 font-bold" : "hover:text-gray-300"
+            }`}
+          >
+            {id.charAt(0).toUpperCase() + id.slice(1)}
+          </h4>
+        </Link>
+      ))}
     </nav>
   );
 };

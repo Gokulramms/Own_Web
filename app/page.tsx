@@ -1,8 +1,7 @@
 "use client";
 import Hero from "./hero-section/Hero";
 import dynamic from "next/dynamic";
-import { useEffect, useRef, useState } from "react";
-import { ScrollerMotion } from "scroller-motion";
+import { useEffect, useRef } from "react";
 import PreLoader from "./animations/PreLoader/PreLoader";
 import { initialBlobityOptions } from "./utils/BlobityConfig";
 import NavBar from "./navbar/NavBar";
@@ -20,7 +19,8 @@ export default function Home() {
     // Dynamically import blobity on the client-side
     import("blobity").then((Blobity) => {
       blobityInstance.current = new Blobity.default(initialBlobityOptions);
-      window.blobity = blobityInstance.current; // For debugging
+      (window as any).blobity = blobityInstance.current;
+ // For debugging
     }).catch((err) => console.error("Failed to load Blobity:", err));
   }, []); // Runs only once on mount
 

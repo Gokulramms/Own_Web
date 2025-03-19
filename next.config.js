@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   experimental: {
-    serverActions: true, // Keep only valid experimental features
+    serverActions: {}, // Keep only valid experimental features
   },
   images: {
     domains: [
