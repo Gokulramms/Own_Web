@@ -6,9 +6,38 @@ export async function GET(request) {
 }
 
 export async function POST(request) {
-    const data = await request.json();
-    return new Response(JSON.stringify({ message: "Received", data }), {
-        status: 201,
+    try {
+        const data = await request.json();
+        return new Response(JSON.stringify({ message: "Received", data }), {
+            status: 201,
+            headers: { "Content-Type": "application/json" },
+        });
+    } catch (error) {
+        return new Response(JSON.stringify({ error: "Invalid JSON" }), {
+            status: 400,
+            headers: { "Content-Type": "application/json" },
+        });
+    }
+}
+
+// Handle unsupported methods like PUT, DELETE
+export async function OPTIONS() {
+    return new Response(null, {
+        status: 204,
+        headers: { Allow: "GET, POST, OPTIONS" },
+    });
+}
+
+export async function PUT() {
+    return new Response(JSON.stringify({ error: "Method Not Allowed" }), {
+        status: 405,
+        headers: { "Content-Type": "application/json" },
+    });
+}
+
+export async function DELETE() {
+    return new Response(JSON.stringify({ error: "Method Not Allowed" }), {
+        status: 405,
         headers: { "Content-Type": "application/json" },
     });
 }
