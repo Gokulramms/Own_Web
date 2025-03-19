@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   experimental: {
-    appDir: true, // Ensure Next.js uses the App Router
+    serverActions: true, // Keep only valid experimental features
   },
   images: {
     domains: [
@@ -13,4 +13,4 @@ const nextConfig = {
   },
 };
 
-export default nextConfig;
+module.exports = nextConfig; // Use module.exports unless using ESM
